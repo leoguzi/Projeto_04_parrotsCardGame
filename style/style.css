@@ -1,3 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
+* {
+  box-sizing: border-box;
+}
 body {
-  background-color: chocolate;
+  font-family: "Roboto";
+  background-color: #eef9bf;
+}
+
+h1 {
+  color: #75b79e;
+  font-size: 56px;
+  font-weight: bold;
+  text-align: center;
+  margin: 30px auto 30px auto;
+}
+.container-cards {
+  margin: 0 10%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 117px;
+  height: 146px;
+  border-radius: 5px;
+  background-color: #a7e9af;
+  margin-bottom: 20px;
+}
+
+.card img {
+  width: 100px;
+  height: 100px;
 }
