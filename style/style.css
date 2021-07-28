@@ -42,7 +42,7 @@ h1 {
   background-color: #a7e9af;
 }
 
-.front-face img {
+.face img {
   width: 100px;
   height: 100px;
 }
@@ -56,6 +56,10 @@ h1 {
 
 .efeito-front {
   transform: rotateY(-180deg);
+}
+
+.hidden {
+  display: none;
 }
 
 @media (max-width: 614px) {
