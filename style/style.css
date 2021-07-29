@@ -58,10 +58,6 @@ h1 {
   transform: rotateY(-180deg);
 }
 
-.hidden {
-  display: none;
-}
-
 @media (max-width: 614px) {
   h1 {
     font-size: 36px;
