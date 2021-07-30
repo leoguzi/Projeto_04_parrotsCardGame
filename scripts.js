@@ -6,7 +6,7 @@ let moves_number = 0;
 let pairs_turned = 0;
 /* this variable holds the number os pairs of the current game*/
 let pairs_number = 0;
-
+/*used to stop the simer*/
 let current_timer = null;
 
 readCardsNumber();
@@ -27,6 +27,11 @@ function readCardsNumber() {
 source and the number of cards choosen by the user*/
 function startGame(cards_number) {
   const container = document.querySelector(".container-cards");
+  /*resets everithing in case it is not the first game*/
+  container.innerHTML = "";
+  previous_card = null;
+  pairs_turned = 0;
+  moves_number = 0;
   let parrots_source = [
     "assets/bobrossparrot.gif",
     "assets/explodyparrot.gif",
@@ -96,6 +101,7 @@ function move(card) {
           `Você venceu em ${moves_number} jogadas e levou ${final_time} segundos!`
         );
         clearInterval(current_timer);
+        setTimeout(restartGame, 1000);
       }
     }
   } else {
@@ -120,6 +126,12 @@ function startTimer() {
     tempo++;
     timer.innerHTML = tempo;
   }, 1000);
+}
+
+function restartGame() {
+  if (prompt("Deseja reiniciar s/n?") === "s") {
+    readCardsNumber();
+  }
 }
 
 function comp() {
