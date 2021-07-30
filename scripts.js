@@ -1,7 +1,11 @@
 /* this variable holds the card that was turned in the first move of a round*/
 let previous_card = null;
 /* this variable holds the number of moves of the current game.*/
-let number_of_moves = 0;
+let moves_number = 0;
+/* this variable holds the number os moves that are already turned in the current game*/
+let pairs_turned = 0;
+/* this variable holds the number os pairs of the current game*/
+let pairs_number = 0;
 
 readCardsNumber();
 /*this function asks and validates the data for starting the game*/
@@ -14,6 +18,7 @@ function readCardsNumber() {
       valid = true;
     }
   }
+  pairs_number = cards_number / 2;
   startGame(cards_number);
 }
 /*this function creates the cards based on the parrots 
@@ -57,8 +62,9 @@ function startGame(cards_number) {
 /*actions performed for every move in the game*/
 function move(card) {
   /*increment the number of moves for the current game*/
-  number_of_moves++;
+  moves_number++;
   /*css classes for the turning animation*/
+  /* turns the card only if it is not turned yet*/
   if (
     !card.querySelector(".back-face").classList.contains("efeito-back") &&
     !card.querySelector(".front-face").classList.contains("efeito-front")
@@ -66,31 +72,35 @@ function move(card) {
     card.querySelector(".back-face").classList.add("efeito-back");
     card.querySelector(".front-face").classList.add("efeito-front");
   }
+  /* if there is a previous card, compares it with the current one*/
   if (previous_card) {
+    /*if they are diferent, turn them back after 1 sec*/
     if (
       previous_card.querySelector(".back-face.face img").getAttribute("src") !==
       card.querySelector(".back-face.face img").getAttribute("src")
     ) {
-      setTimeout(turnCardsBack(card), 3000);
+      setTimeout(turnCardsBack, 1000, card);
     } else {
+      /*if they are equal, clear the previous card preparing to the next move, but don't turn them back */
       previous_card = null;
+      pairs_turned++;
+      /*check if the game has ended and show the alert case it's true*/
+      if (pairs_turned === pairs_number) {
+        setTimeout(alert, 1000, `Você venceu em ${moves_number} jogadas!`);
+      }
     }
   } else {
+    /* if it is the first card of the row sets it as the previous card for the next moove.*/
     previous_card = card;
   }
 }
-
+/* this function turns the cards back when they are not equal*/
 function turnCardsBack(card) {
-  console.log("aqui gay");
-  if (
-    card.querySelector(".back-face").classList.contains("efeito-back") &&
-    card.querySelector(".front-face").classList.contains("efeito-front")
-  ) {
-    card.querySelector(".back-face").classList.remove("efeito-back");
-    card.querySelector(".front-face").classList.remove("efeito-front");
-    previous_card.querySelector(".back-face").classList.remove("efeito-back");
-    previous_card.querySelector(".front-face").classList.remove("efeito-front");
-  }
+  card.querySelector(".back-face").classList.remove("efeito-back");
+  card.querySelector(".front-face").classList.remove("efeito-front");
+  previous_card.querySelector(".back-face").classList.remove("efeito-back");
+  previous_card.querySelector(".front-face").classList.remove("efeito-front");
+  /*resets the previous card, preparing for the next move*/
   previous_card = null;
 }
 
