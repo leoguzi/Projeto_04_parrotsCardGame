@@ -7,6 +7,8 @@ let pairs_turned = 0;
 /* this variable holds the number os pairs of the current game*/
 let pairs_number = 0;
 
+let current_timer = null;
+
 readCardsNumber();
 /*this function asks and validates the data for starting the game*/
 function readCardsNumber() {
@@ -58,6 +60,7 @@ function startGame(cards_number) {
                           </div>
                         </div>`;
   }
+  startTimer();
 }
 /*actions performed for every move in the game*/
 function move(card) {
@@ -86,7 +89,13 @@ function move(card) {
       pairs_turned++;
       /*check if the game has ended and show the alert case it's true*/
       if (pairs_turned === pairs_number) {
-        setTimeout(alert, 1000, `Você venceu em ${moves_number} jogadas!`);
+        const final_time = document.querySelector(".timer").innerHTML;
+        setTimeout(
+          alert,
+          1000,
+          `Você venceu em ${moves_number} jogadas e levou ${final_time} segundos!`
+        );
+        clearInterval(current_timer);
       }
     }
   } else {
@@ -102,6 +111,15 @@ function turnCardsBack(card) {
   previous_card.querySelector(".front-face").classList.remove("efeito-front");
   /*resets the previous card, preparing for the next move*/
   previous_card = null;
+}
+
+function startTimer() {
+  const timer = document.querySelector(".timer");
+  let tempo = 0;
+  current_timer = setInterval(function () {
+    tempo++;
+    timer.innerHTML = tempo;
+  }, 1000);
 }
 
 function comp() {

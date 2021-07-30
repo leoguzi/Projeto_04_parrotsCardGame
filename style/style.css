@@ -58,6 +58,19 @@ h1 {
   transform: rotateY(-180deg);
 }
 
+.timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  font-weight: bold;
+  font-size: 30px;
+  position: fixed;
+  right: 10px;
+  top: 10px;
+}
+
 @media (max-width: 614px) {
   h1 {
     font-size: 36px;
