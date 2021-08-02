@@ -24,7 +24,7 @@ function readCardsNumber() {
   startGame(cards_number);
 }
 /*this function creates the cards based on the parrots 
-source and the number of cards choosen by the user*/
+source and the number of cards chosen by the user*/
 function startGame(cards_number) {
   const container = document.querySelector(".container-cards");
   /*resets everithing in case it is not the first game*/
@@ -65,6 +65,7 @@ function startGame(cards_number) {
                           </div>
                         </div>`;
   }
+  /*starts the timer*/
   startTimer();
 }
 /*actions performed for every move in the game*/
@@ -92,14 +93,11 @@ function move(card) {
       /*if they are equal, clear the previous card preparing to the next move, but don't turn them back */
       previous_card = null;
       pairs_turned++;
-      /*check if the game has ended and show the alert case it's true*/
+      /*check if the game has ended and show the alert in case it's true*/
       if (pairs_turned === pairs_number) {
         const final_time = document.querySelector(".timer").innerHTML;
-        setTimeout(
-          alert,
-          1000,
-          `Você venceu em ${moves_number} jogadas e levou ${final_time} segundos!`
-        );
+        let final_messege = `Você venceu em ${moves_number} jogadas e levou ${final_time} segundos!`;
+        setTimeout(alert, 1000, final_messege);
         clearInterval(current_timer);
         setTimeout(restartGame, 1000);
       }
